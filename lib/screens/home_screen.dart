@@ -2,6 +2,7 @@ import 'package:cours_dar_2025/models/option.dart';
 import 'package:cours_dar_2025/models/transaction.dart';
 import 'package:cours_dar_2025/screens/scan_screen.dart';
 import 'package:cours_dar_2025/utils/constants.dart';
+import 'package:cours_dar_2025/widgets/card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
@@ -110,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             (route) => true,
                           );
                         },
-                        child: cardWidget(),
+                        child: CardWidget(),
                       ),
                       GridView.builder(
                         shrinkWrap: true,
@@ -209,69 +210,6 @@ class _HomeScreenState extends State<HomeScreen> {
         SizedBox(height: 5),
         Text(title, style: GoogleFonts.aBeeZee(fontSize: 14)),
       ],
-    );
-  }
-
-  Widget cardWidget() {
-    return Container(
-      height: 200,
-      width: 400,
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 32),
-      decoration: BoxDecoration(
-        color: Colors.blue,
-        borderRadius: BorderRadius.circular(15),
-        image: DecorationImage(
-          image: AssetImage("assets/images/bg.png"),
-          fit: BoxFit.cover,
-          colorFilter: ColorFilter.mode(
-            Colors.white.withValues(alpha: .3),
-            BlendMode.srcIn,
-          ),
-        ),
-      ),
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.bottomRight,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4),
-              child: Image.asset(
-                "assets/images/wave_logo.png",
-                width: 50,
-                height: 50,
-              ),
-            ),
-          ),
-          Center(
-            child: Container(
-              width: 145,
-              height: 150,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    height: 128,
-                    padding: EdgeInsets.only(top: 8, bottom: 4),
-                    child: PrettyQrView.data(data: 'https://google.com'),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.camera_alt_rounded, size: 18),
-                      SizedBox(width: 5),
-                      Text("Scanner"),
-                    ],
-                  ),
-                  SizedBox(height: 2),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
