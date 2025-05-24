@@ -1,4 +1,6 @@
 import 'package:cours_dar_2025/models/option.dart';
+import 'package:cours_dar_2025/models/transaction.dart';
+import 'package:cours_dar_2025/screens/scan_screen.dart';
 import 'package:cours_dar_2025/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -96,7 +98,20 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Column(
                     children: [
-                      cardWidget(),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ScanScreen();
+                              },
+                            ),
+                            (route) => true,
+                          );
+                        },
+                        child: cardWidget(),
+                      ),
                       GridView.builder(
                         shrinkWrap: true,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -119,10 +134,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       ListView.builder(
                         shrinkWrap: true,
-                        itemCount: 10,
+                        itemCount: Transaction.transList.length,
                         padding: EdgeInsets.zero,
                         physics: ClampingScrollPhysics(),
                         itemBuilder: (context, index) {
+                          Transaction t = Transaction.transList[index];
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 16.0,
@@ -136,13 +152,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Titre",
+                                      "${t.type == TypeT.transferE
+                                          ? "De "
+                                          : t.type == TypeT.transferS
+                                          ? "A "
+                                          : ""}${t.title}",
                                       style: GoogleFonts.aBeeZee(
                                         color: primaryColor,
                                       ),
                                     ),
                                     Text(
-                                      "10000F",
+                                      "${t.type == TypeT.transferS || t.type == TypeT.paiement || t.type == TypeT.retrait ? "-" : ""}${t.amount}F",
                                       style: GoogleFonts.aBeeZee(
                                         color: primaryColor,
                                       ),
@@ -150,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ],
                                 ),
                                 Text(
-                                  "Date",
+                                  t.dateTime.toString(),
                                   style: GoogleFonts.aBeeZee(
                                     color: Colors.grey,
                                   ),

@@ -13,10 +13,34 @@ class Transaction {
 
   static List<Transaction> transList = [
     Transaction(
-      title: "Transfert",
+      title: "Modou FALL 77777777",
       dateTime: DateTime.now(),
       amount: 10000,
       type: TypeT.transferE,
+    ),
+    Transaction(
+      title: "Canal+",
+      dateTime: DateTime.now(),
+      amount: 10000,
+      type: TypeT.paiement,
+    ),
+    Transaction(
+      title: "Retrait",
+      dateTime: DateTime.now(),
+      amount: 10000,
+      type: TypeT.retrait,
+    ),
+    Transaction(
+      title: "Depot",
+      dateTime: DateTime.now(),
+      amount: 10000,
+      type: TypeT.depot,
+    ),
+    Transaction(
+      title: "Mbaye Diop 780122332",
+      dateTime: DateTime.now(),
+      amount: 10000,
+      type: TypeT.transferS,
     ),
   ];
 }
