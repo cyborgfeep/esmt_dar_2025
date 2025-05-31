@@ -1,11 +1,11 @@
 import 'package:cours_dar_2025/models/option.dart';
 import 'package:cours_dar_2025/models/transaction.dart';
 import 'package:cours_dar_2025/screens/scan_screen.dart';
+import 'package:cours_dar_2025/screens/transaction_screen.dart';
 import 'package:cours_dar_2025/utils/constants.dart';
 import 'package:cours_dar_2025/widgets/card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pretty_qr_code/pretty_qr_code.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -197,19 +197,31 @@ class _HomeScreenState extends State<HomeScreen> {
     required String title,
     required IconData icon,
   }) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: color.withValues(alpha: .2),
-            borderRadius: BorderRadius.circular(45),
+    return GestureDetector(
+      onTap: () {
+        if (title == "Transfert" || title == "Crédit") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TransactionScreen(title: title),
+            ),
+          );
+        }
+      },
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: .2),
+              borderRadius: BorderRadius.circular(45),
+            ),
+            child: Icon(icon, size: 35, color: color),
           ),
-          child: Icon(icon, size: 35, color: color),
-        ),
-        SizedBox(height: 5),
-        Text(title, style: GoogleFonts.aBeeZee(fontSize: 14)),
-      ],
+          SizedBox(height: 5),
+          Text(title, style: GoogleFonts.aBeeZee(fontSize: 14)),
+        ],
+      ),
     );
   }
 }
